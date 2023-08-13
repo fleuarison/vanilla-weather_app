@@ -9,10 +9,57 @@
     <title>Weather App</title>
 </head>
 <body>
-  <div class="container">
-  <h1>Hello world</h1> 
-<a href="" class="btn btn-primary">Click here</a>
+  <div class="card" style="width: 600px">
+    <form class="weather-app" id="search-form">
+      <label for="city" class="form-label">Enter a city</label>
+      <input type="text" placeholder="City" id="city-input" />
+      <input type="submit" class="btn btn-primary" value="Search" />
+    </form>
+    <div class="card-body">
+      <h1 class="card-title" id="new-city">Antananarivo</h1>
+    </div>
+
+    <br />
+    <div class="container text-center">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="today" id="date">
+            Dimanche 17:11
+          </div>
+          <div class="adjective" id="description">Clouds</div>
+          <div class="clearfix weather-temperature">
+          <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="Clear" id="icon" class="float-left" />
+        </div>
+        </div>
+        <div class="col">
+          <div class="caracteristic">
+            Precipitation : <span id="precipitation"></span>%
+            <br />
+            Humidity : <span id="humidity"></span>%
+            <br />
+            Wind : <span id="wind"></span>km/h
+          </div>
+        </div>
+        <div class="col">
+          <strong>
+            <span class="temperatureToday" id="degree"> </span>
+            <span class="conversion">
+              <a href="" id="c-link">°C</a> |<a href="" id="f-link">°F</a>
+            </span>
+          </strong>
+        </div>
+      </div>
+    </div>
   </div>
+  <small>
+    <a
+      href="https://github.com/fleuarison/vanilla-weather_app"
+      target="_blank"
+      >Open-source code</a
+    >
+    by Fleuria RANOROARISON
+  </small>
   <script src="src/app.js"></script>
+
 </body>
 </html>
