@@ -24,11 +24,9 @@ function formatDate(date) {
   dateToday.innerHTML = formatDate("now");
   
   function weatherCity(response) {
-
+    celsiusTemperature = response.data.main.temp;
     document.querySelector("#new-city").innerHTML = response.data.name;
-    document.querySelector("#degree").innerHTML = Math.round(
-      response.data.main.temp
-    );
+    document.querySelector("#degree").innerHTML = Math.round(celsiusTemperature);
     document.querySelector("#humidity").innerHTML = response.data.main.humidity;
     document.querySelector("#wind").innerHTML = Math.round(
       response.data.wind.speed
@@ -39,7 +37,30 @@ function formatDate(date) {
     let iconElement = document.querySelector("#icon");
   iconElement.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("alt", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+
+  
   }
+function displayFahreinheitTemperature(event){
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#degree");
+    celsiusLink.classList.remove("active");
+    fahreinheitLink.classList.add("active");
+    let fahreinheitDegree = (celsiusTemperature*9/5) + 32;
+    temperatureElement.innerHTML= Math.round(fahreinheitDegree);
+}
+let celsiusTemperature = null;
+  let fahreinheitLink = document.querySelector("#f-link");
+  fahreinheitLink.addEventListener ("click", displayFahreinheitTemperature);
+
+  function displayCelsiusTemperature(event){
+    event.preventDefault();
+    let temperatureElement = document.querySelector("#degree");
+    celsiusLink.classList.add("active");
+    fahreinheitLink.classList.remove("active");
+    temperatureElement.innerHTML= Math.round(celsiusTemperature);
+}
+  let celsiusLink = document.querySelector("#c-link");
+  celsiusLink.addEventListener ("click", displayCelsiusTemperature);
   
   function search(cityInput) {
     let apiKey = "6782253072f7d90462731a624097fc54";
@@ -70,3 +91,4 @@ function formatDate(date) {
   
   let locationButton = document.querySelector("#location");
   locationButton.addEventListener("click", getCurrentPosition);
+
