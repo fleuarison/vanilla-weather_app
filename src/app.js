@@ -24,6 +24,7 @@ function formatDate(date) {
   dateToday.innerHTML = formatDate("now");
   
   function weatherCity(response) {
+
     document.querySelector("#new-city").innerHTML = response.data.name;
     document.querySelector("#degree").innerHTML = Math.round(
       response.data.main.temp
@@ -34,6 +35,10 @@ function formatDate(date) {
     );
     document.querySelector("#description").innerHTML =
       response.data.weather[0].main;
+
+    let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   }
   
   function search(cityInput) {
