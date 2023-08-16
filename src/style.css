@@ -22,12 +22,12 @@ body {
 
   .humidity {
     font-size: 25px;
-    font-weight: lighter;
+    font-weight: 300;
   }
 
   .wind {
     font-size: 25px;
-    font-weight: lighter;
+    font-weight: 300;
   }
 
   .temperatureToday {
