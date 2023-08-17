@@ -77,6 +77,7 @@ let celsiusTemperature = null;
   searchForm.addEventListener("submit", handleSubmit);
   
   search("Antananarivo");
+  displayForecast();
   
   function showPosition(position) {
     let apiKey = "6782253072f7d90462731a624097fc54";
@@ -92,3 +93,23 @@ let celsiusTemperature = null;
   let locationButton = document.querySelector("#location");
   locationButton.addEventListener("click", getCurrentPosition);
 
+  function displayForecast() {
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML = `<div class="row">`;
+    let days = ["Tue","Wen","Thu","Fri","Sat"];
+    days.forEach(function(day) {
+      forecastHTML = forecastHTML + `
+    <div class="col">
+      <div class="weather-forecast-date">
+      ${day}
+      </div>
+      <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" id="icon" class="float-left" width="50"/>
+      <div class="weather-forecast-degree">
+        <span class="max">20</span>°
+        <span class="min">10</span>°
+      </div>
+    </div>`;
+    });
+    forecastHTML = forecastHTML + `</div>` ;
+    forecastElement.innerHTML = forecastHTML;
+  }
