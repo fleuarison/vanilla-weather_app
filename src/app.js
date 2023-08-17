@@ -25,7 +25,8 @@ function formatDate(date) {
   
   function getForecast(coordinates){
     let apiKey = "6782253072f7d90462731a624097fc54";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units="metric"`
+    let units = "metric";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`
     axios.get(apiUrl).then(displayForecast);
   }
   function weatherCity(response) {
@@ -98,22 +99,30 @@ let celsiusTemperature = null;
   let locationButton = document.querySelector("#location");
   locationButton.addEventListener("click", getCurrentPosition);
 
+ function formatDay(timestamp){
+let date = new Date(timestamp*1000);
+let day = date.getDay();
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+return days[day];
+ }
+ 
   function displayForecast(response) {
+    let forecast = response.data.daily;
     let forecastElement = document.querySelector("#forecast");
     let forecastHTML = `<div class="row">`;
-    let days = ["Tue","Wen","Thu","Fri","Sat"];
-    days.forEach(function(day) {
+    forecast.forEach(function(forecastDay, index) {
+      if (index < 6){
       forecastHTML = forecastHTML + `
     <div class="col">
       <div class="weather-forecast-date">
-      ${day}
+      ${formatDay(forecastDay.dt)}
       </div>
-      <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" id="icon" class="float-left" width="50"/>
+      <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" id="icon" class="float-left" width="50"/>
       <div class="weather-forecast-degree">
-        <span class="max">20</span>°
-        <span class="min">10</span>°
+        <span class="max">${Math.round(forecastDay.temp.max)}°</span>
+        <span class="min">${Math.round(forecastDay.temp.min)}°</span>
       </div>
-    </div>`;
+    </div>`;}
     });
     forecastHTML = forecastHTML + `</div>` ;
     forecastElement.innerHTML = forecastHTML;
