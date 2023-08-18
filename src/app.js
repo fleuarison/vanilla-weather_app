@@ -90,14 +90,6 @@ let celsiusTemperature = null;
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(weatherCity);
   }
-  
-  function getCurrentPosition(event) {
-    event.preventDefault();
-    navigator.geolocation.getCurrentPosition(showPosition);
-  }
-  
-  let locationButton = document.querySelector("#location");
-  locationButton.addEventListener("click", getCurrentPosition);
 
  function formatDay(timestamp){
 let date = new Date(timestamp*1000);
